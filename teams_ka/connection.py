@@ -1,5 +1,6 @@
 import logging, random, time, os
 import teams_ka.elements as Element
+import teams_ka.helpers as helpers
 from enum import Enum
 from teams_ka.models import User
 from selenium.webdriver.firefox.webdriver import WebDriver
@@ -61,6 +62,12 @@ class Connection:
 
   class Options:
 
+    # discordWebhookUrl
+    @property
+    def discordWebhookUrl(self): return self._discordWebhookUrl
+    @discordWebhookUrl.setter
+    def discordWebhookUrl(self, value): self._discordWebhookUrl = value
+
     # userReconnectDelay
     @property
     def userReconnectDelay(self): return self._userReconnectDelay
@@ -121,6 +128,7 @@ class Connection:
     # options
     self.user = User(config.username, config.password)
     self.options = Options()
+    self.options.discordWebhookUrl = config.discordWebhookUrl
     self.options.userReconnectDelay = config.userReconnectDelay
     self.options.refreshRate = config.refreshRate
     self.options.interactive = config.interactive
@@ -143,6 +151,15 @@ class Connection:
   #
   # region    HELPERS
   ###########################################################################
+
+  @property
+  def status(self):
+    return self._status
+
+  @status.setter
+  def status(self, value):
+    self._status = value
+    helpers.notifyDiscord(self.options.discordWebhookUrl, '@everyone' + value.value)
 
   @property
   def action(self):

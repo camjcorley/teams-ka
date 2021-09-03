@@ -8,6 +8,7 @@ class Default_Config:
     # app
     self.verbose = True
     self.key = ''
+    self.discordWebhookUrl = ''
 
     # account
     self.username = ''
@@ -135,6 +136,7 @@ class Config:
     config.add_section('app')
     config.set('app', 'verbose', 'False')
     config.set('app', 'key', encoded.key)
+    config.set('app', 'discordWebhookUrl', self.discordWebhookUrl)
 
     # account
     config.add_section('account')
@@ -200,6 +202,7 @@ class Config:
     dict = {
       'verbose': config.getboolean('app', 'verbose'),
       'key': config.get('app', 'key'),
+      'discordWebhookUrl': config.get('app', 'discordWebhookUrl'),
       'username': config.get('account', 'username'),
       'password': config.get('account', 'password'),
       'timeoutMultiplier': config.getint('session', 'timeoutMultiplier'),

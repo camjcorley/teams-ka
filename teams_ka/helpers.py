@@ -1,9 +1,19 @@
-import os, sys
+import os, requests, sys
 from configparser import ConfigParser
 
 
 # info
 amDebugging = bool(sys.gettrace())
+
+
+def notifyDiscord(url, msg):
+  if url:
+    try:
+      return requests.post(url, json={"content": msg})
+    except:
+      return None
+  else:
+    return None
 
 
 def clear():
