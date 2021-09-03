@@ -159,7 +159,7 @@ class Connection:
   @status.setter
   def status(self, value):
     self._status = value
-    helpers.notifyDiscord(self.options.discordWebhookUrl, '@everyone' + value.value)
+    helpers.notifyDiscord(self.options.discordWebhookUrl, '@everyone ' + value.value)
 
   @property
   def action(self):
