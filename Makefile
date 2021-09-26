@@ -7,7 +7,7 @@ build: clean
 
 build-win: clean
 	# -pip3 install auto-py-to-exe
-	pyinstaller --noconfirm --onefile --console --name "teams-ka" --clean  "C:/Projects/teams-ka/__main__.py"
+	pyinstaller --noconfirm --onefile --console --name "teams-ka" --clean --add-binary "C:/Windows/System32/geckodriver.exe;."  "C:/Projects/teams-ka/__main__.py"
 
 run:
 	./build/teams-ka.app
